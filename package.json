@@ -1,0 +1,12 @@
+{
+  "name": "scib-umd-backend",
+  "version": "0.0.1",
+  "description": "Backend administrador de microservicios para SCIB UMD",
+  "main": "main.js",
+  "author": "jorgesanux",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "dotenv": "^16.0.0"
+  }
+}
