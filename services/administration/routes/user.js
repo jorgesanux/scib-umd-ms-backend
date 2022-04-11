@@ -58,4 +58,17 @@ router.delete("/:id", async function(req, res, next){
   }
 });
 
+router.put("/:id", async function(req, res, next){
+  try{
+    const body = req.body;
+    res.json(new APIResponse({
+      statusCode: 200,
+      message: "Usuario actualizado.",
+      result: await userController.fullUpdateUser(req.params.id, body)
+    }).toJSON());
+  }catch(error){
+    next(error);
+  }
+});
+
 export default router;

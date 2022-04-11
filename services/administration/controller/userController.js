@@ -26,7 +26,21 @@ export default class UserController{
             throw error;
         }
     }
-   
+
+    async fullUpdateUser(id, body){
+        try{
+            let affectedRows = (await User.update(body,{
+                where: {
+                    id_usuario: id
+                }
+            }))?.[0];
+            if(affectedRows <= 0) throw new APIError(404, "No se puede actualizar un usuario que no existe.");
+            return {affected_rows: affectedRows};
+        }catch(error){
+            throw error;
+        }
+    }
+
     async deleteUser(id){
         try{
             let affectedRows = await User.destroy({
