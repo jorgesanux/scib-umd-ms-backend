@@ -1,17 +1,32 @@
-import db from "../config/db.js";
-
 import User from "../model/user.js";
+import Sede from "../model/sede.js";
+import Rol from "../model/rol.js";
 import APIError from "../util/apiError.js";
 
 import { UniqueConstraintError } from 'sequelize';
 
 export default class UserController{
     async getAllUsers(){
-        return await User.findAll();
+        return await User.findAll({
+            include: [Sede, Rol]
+        });
     }
 
     async getUser(id){
-        const user = await User.findByPk(id);
+        const user = await User.findByPk(id, {
+            include: [
+                {
+                    model: Sede,
+                    attributes: [["descripcion","nombre_sede"]],
+                    required: true
+                },
+                {
+                    model: Rol,
+                    attributes: [["nombre","nombre_rol"]],
+                    required: true
+                }
+            ]
+        });
         if(user === null ) throw new APIError(404, `No se encontró un usuario con el id ${id}`);
         return user;
     }

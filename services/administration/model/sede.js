@@ -32,7 +32,8 @@ Sede.init({
 } , {
     sequelize,
     timestamps: false,
-    tableName: Constant.TABLE_NAME.SEDE_TABLE
+    tableName: Constant.TABLE_NAME.SEDE_TABLE,
+    modelName: "sede"
 });
 
 export default Sede;

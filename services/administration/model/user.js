@@ -18,7 +18,7 @@ User.init({
         allowNull: false,
         references: {
             model: Sede,
-            key: "id_sede"
+            key: "id_sede",
         }
     },
     id_rol: {
@@ -59,7 +59,16 @@ User.init({
 },{
     sequelize,
     timestamps: false,
-    tableName: Constant.TABLE_NAME.USER_TABLE
+    tableName: Constant.TABLE_NAME.USER_TABLE,
+    modelName: "user"
+});
+
+User.belongsTo(Sede, {
+    foreignKey: "id_sede"
+});
+
+User.belongsTo(Rol, {
+    foreignKey: "id_rol"
 });
 
 export default User;
