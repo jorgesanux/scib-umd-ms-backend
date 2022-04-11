@@ -8,5 +8,9 @@
   "dependencies": {},
   "devDependencies": {
     "dotenv": "^16.0.0"
+  },
+  "scripts": {
+    "start-admin": "node ./services/administration/bin/www.js",
+    "dev-admin": "nodemon ./services/administration/bin/www.js"
   }
 }
