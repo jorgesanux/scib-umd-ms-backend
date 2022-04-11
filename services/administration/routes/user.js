@@ -19,9 +19,9 @@ router.get('/', async function(req, res, next) {
   }
 });
 
-router.get("/:userId", async function(req, res, next){
+router.get("/:id", async function(req, res, next){
   try{
-    const user = await userController.getUser(req.params.userId);
+    const user = await userController.getUser(req.params.id);
     res.json(new APIResponse({
       statusCode: 200,
       result: user.toJSON()
@@ -46,12 +46,12 @@ router.post("/", async function(req, res, next){
   }
 });
 
-router.delete("/:userId", async function(req, res, next){
+router.delete("/:id", async function(req, res, next){
   try{
     res.json(new APIResponse({
       statusCode: 200,
       message: "Usuario eliminado.",
-      result: await userController.deleteUser(req.params.userId)
+      result: await userController.deleteUser(req.params.id)
     }).toJSON());
   }catch(error){
     next(error);
