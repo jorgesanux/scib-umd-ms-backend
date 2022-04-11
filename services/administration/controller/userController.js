@@ -34,7 +34,10 @@ export default class UserController{
                     id_usuario: id
                 }
             }))?.[0];
-            if(affectedRows <= 0) throw new APIError(404, "No se puede actualizar un usuario que no existe.");
+            if(affectedRows <= 0) {
+                body.id_usuario = id;
+                return this.createUser(body);
+            }
             return {affected_rows: affectedRows};
         }catch(error){
             throw error;

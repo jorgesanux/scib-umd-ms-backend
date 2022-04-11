@@ -61,14 +61,17 @@ router.delete("/:id", async function(req, res, next){
 router.put("/:id", async function(req, res, next){
   try{
     const body = req.body;
+    let result = await userController.fullUpdateUser(req.params.id, body);
     res.json(new APIResponse({
       statusCode: 200,
-      message: "Usuario actualizado.",
-      result: await userController.fullUpdateUser(req.params.id, body)
+      message: "affected_rows" in result ? "Usuario actualizado." :  "Usuario creado.",
+      result: result
     }).toJSON());
   }catch(error){
     next(error);
   }
 });
+
+
 
 export default router;
