@@ -27,4 +27,17 @@ export default class UserController{
         }
     }
    
+    async deleteUser(id){
+        try{
+            let affectedRows = await User.destroy({
+                where: {
+                    id_usuario: id
+                }
+            });
+            if(affectedRows <= 0) throw new APIError(404, "No se puede eliminar un usuario que no existe.");
+            return {affected_rows: affectedRows};
+        }catch(error){
+            throw(error);
+        }
+    }
 }

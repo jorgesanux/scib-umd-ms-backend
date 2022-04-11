@@ -46,4 +46,16 @@ router.post("/", async function(req, res, next){
   }
 });
 
+router.delete("/:userId", async function(req, res, next){
+  try{
+    res.json(new APIResponse({
+      statusCode: 200,
+      message: "Usuario eliminado.",
+      result: await userController.deleteUser(req.params.userId)
+    }).toJSON());
+  }catch(error){
+    next(error);
+  }
+});
+
 export default router;
