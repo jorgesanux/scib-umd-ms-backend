@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 import Constant from './util/constant.js';
 import indexRouter from "./routes/index.js";
 import userRouter from "./routes/user.js";
+import APIError from './util/apiError.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -21,5 +22,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(Constant.BASE_PATH.BASE_PATH, indexRouter);
 app.use(Constant.BASE_PATH.BASE_PATH + Constant.BASE_PATH.BASE_PATH_USER, userRouter);
+
+app.use((error, req, res, next)=>{
+    if(error instanceof APIError){
+        res.status(error.status);
+        res.json(error.toJSON());
+    }else{
+        next(error);
+    }
+});
+app.use(function(error, req, res, next){
+    res.status(500);
+    res.json(new APIError(500,error.message).toJSON());
+});
 
 export default app;
