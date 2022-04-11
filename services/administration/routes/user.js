@@ -17,16 +17,19 @@ router.get('/', async function(req, res, next) {
 });
 
 router.get("/:userId", async function(req, res, next){
-  const user = await userController.getUser(req.params.userId);
-  if(user === null){
-    res.status(404);
-    res.json(new APIError(404, `No se encontró un usuario con el id ${req.params.userId}`).toJSON());
-    return ;
+  try{
+    const user = await userController.getUser(req.params.userId);
+    res.json(new APIResponse({
+      statusCode: 200,
+      result: user.toJSON()
+    }).toJSON());
+  }catch(error){
+    next(error);
   }
-  res.json(new APIResponse({
-    statusCode: 200,
-    result: user
-  }).toJSON());
 });
+
+// router.post("/", async function(req, res, next){
+
+// });
 
 export default router;
