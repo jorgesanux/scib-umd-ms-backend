@@ -37,7 +37,7 @@ export default class UserController{
             if(affectedRows <= 0) throw new APIError(404, "No se puede eliminar un usuario que no existe.");
             return {affected_rows: affectedRows};
         }catch(error){
-            throw(error);
+            throw error;
         }
     }
 }
