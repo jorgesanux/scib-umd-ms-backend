@@ -3,6 +3,8 @@ import db from "../config/db.js";
 import User from "../model/user.js";
 import APIError from "../util/apiError.js";
 
+import { UniqueConstraintError } from 'sequelize';
+
 export default class UserController{
     async getAllUsers(){
         return await User.findAll();
@@ -14,8 +16,15 @@ export default class UserController{
         return user;
     }
 
-    async createUser(user){
-        return await User.create(user);
+    async createUser(rawUser){
+        try{
+            return await User.create(rawUser);
+        }catch(error){
+            if(error instanceof UniqueConstraintError){
+                throw new APIError(400, "El usuario ya existe.", error.original.code);
+            }
+            throw error;
+        }
     }
    
 }

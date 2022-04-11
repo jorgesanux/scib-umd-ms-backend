@@ -163,3 +163,4 @@ dist
 
 # Custom lines
 .env
+.vscode

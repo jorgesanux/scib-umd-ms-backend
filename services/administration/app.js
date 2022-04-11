@@ -33,7 +33,7 @@ app.use((error, req, res, next)=>{
 });
 app.use(function(error, req, res, next){
     res.status(500);
-    res.json(new APIError(500,error.message).toJSON());
+    res.json(new APIError(500,error.message,error?.original?.code).toJSON());
 });
 
 export default app;

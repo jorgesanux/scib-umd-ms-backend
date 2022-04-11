@@ -1,19 +1,22 @@
 import express from "express";
 
 import UserController from "../controller/userController.js";
-import APIError from "../util/apiError.js";
 import APIResponse from "../util/apiResponse.js";
 
 const router = express.Router();
 const userController = new UserController();
 
 router.get('/', async function(req, res, next) {
-  res.json(
-    new APIResponse({
-      statusCode: 200,
-      results: await userController.getAllUsers()
-    })
-  );
+  try{
+    res.json(
+      new APIResponse({
+        statusCode: 200,
+        results: await userController.getAllUsers()
+      })
+    );
+  }catch(error){
+    next(error);
+  }
 });
 
 router.get("/:userId", async function(req, res, next){
@@ -28,8 +31,19 @@ router.get("/:userId", async function(req, res, next){
   }
 });
 
-// router.post("/", async function(req, res, next){
-
-// });
+router.post("/", async function(req, res, next){
+  const body = req.body;
+  try{
+    const user = await userController.createUser(body);
+    res.status(201);
+    res.json(new APIResponse({
+      statusCode: 201,
+      message: "Usuario creado.",
+      result: user.toJSON()
+    }).toJSON());
+  }catch(error){
+    next(error);
+  }
+});
 
 export default router;
