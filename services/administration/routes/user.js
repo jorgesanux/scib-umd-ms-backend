@@ -6,7 +6,7 @@ import APIResponse from "../util/apiResponse.js";
 const router = express.Router();
 const userController = new UserController();
 
-router.get('/', async function(req, res, next) {
+router.get('/', async function(_req, res, next) {
   try{
     res.json(
       new APIResponse({

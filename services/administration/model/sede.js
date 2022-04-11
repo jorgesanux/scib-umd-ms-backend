@@ -3,7 +3,7 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/db.js";
 import Constant from "../util/constant.js";
 
-class Sede extends Model {};
+class Sede extends Model {}
 
 Sede.init({
     id_sede: {

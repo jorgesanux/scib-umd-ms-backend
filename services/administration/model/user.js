@@ -5,7 +5,7 @@ import Constant from "../util/constant.js";
 import Rol from "./rol.js";
 import Sede from "./sede.js";
 
-class User extends Model {};
+class User extends Model {}
 
 User.init({
     id_usuario: {

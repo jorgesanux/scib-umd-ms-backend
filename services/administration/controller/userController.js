@@ -7,7 +7,7 @@ import { UniqueConstraintError } from 'sequelize';
 
 export default class UserController{
     async getAllUsers(){
-        return await User.findAll({
+        return User.findAll({
             include: [Sede, Rol]
         });
     }

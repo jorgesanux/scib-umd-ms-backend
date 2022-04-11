@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(Constant.BASE_PATH.BASE_PATH, indexRouter);
 app.use(Constant.BASE_PATH.BASE_PATH + Constant.BASE_PATH.BASE_PATH_USER, userRouter);
 
-app.use((error, req, res, next)=>{
+app.use((error, _req, res, next)=>{
     if(error instanceof APIError){
         res.status(error.status);
         res.json(error.toJSON());
@@ -31,7 +31,7 @@ app.use((error, req, res, next)=>{
         next(error);
     }
 });
-app.use(function(error, req, res, next){
+app.use(function(error, _req, res, _next){
     res.status(500);
     res.json(new APIError(500,error.message,error?.original?.code).toJSON());
 });

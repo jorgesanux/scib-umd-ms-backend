@@ -12,4 +12,4 @@ class TableName{
 export default class Constant{
     static BASE_PATH = BasePath;
     static TABLE_NAME = TableName;
-};
+}
