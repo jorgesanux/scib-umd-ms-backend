@@ -429,7 +429,56 @@
                     "User"
                 ],
                 "summary": "Elimina un usuario expecificando su ID",
-                "operationId": "deleteUser"
+                "operationId": "deleteUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID del usuario a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 2
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 200,
+                                        "message": "Usuario eliminado.",
+                                        "results": [],
+                                        "result": {
+                                            "affected_rows": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 404,
+                                        "message": "No se puede eliminar un usuario que no existe.",
+                                        "result": null,
+                                        "results": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
