@@ -62,9 +62,12 @@ router.put("/:id", async function(req, res, next){
   try{
     const body = req.body;
     let result = await userController.updateOrCreateUser(req.params.id, body);
+    let bIsUpdate = "affected_rows" in result;
+    let statusCode = bIsUpdate ? 200 : 201;
+    res.status(statusCode);
     res.json(new APIResponse({
-      statusCode: 200,
-      message: "affected_rows" in result ? "Usuario actualizado." :  "Usuario creado.",
+      statusCode,
+      message: bIsUpdate ? "Usuario actualizado." :  "Usuario creado.",
       result: result
     }).toJSON());
   }catch(error){

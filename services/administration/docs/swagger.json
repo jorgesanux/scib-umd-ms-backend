@@ -1,0 +1,481 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Microservice Administration SCIB UMD",
+        "version": "0.0.1",
+        "contact": {
+            "name": "SCIB UMD API"
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "servers": [
+        {"url": "/api"}
+    ],
+    "tags": [
+        {
+            "name": "User",
+            "description": "Operaciones relacionadas con el usuario"
+        }
+    ],
+    "paths": {
+        "/user": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Devuelve todos los usuarios",
+                "description": "Retorna una lista con todos los usuarios disponibles en el sistema",
+                "operationId": "getAllUsers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 200,
+                                        "message": null,
+                                        "results": [
+                                            {
+                                                "id_usuario": 1,
+                                                "id_sede": 1,
+                                                "id_rol": "ADM",
+                                                "documento": "111111111",
+                                                "nombre": "Jorge",
+                                                "apellido": "Sanabria",
+                                                "fecha_nacimiento": "1999-09-13",
+                                                "activo": true,
+                                                "creado_en": "2021-10-31T07:48:00.949Z",
+                                                "sede": {
+                                                    "id_sede": 1,
+                                                    "descripcion": "Administrativa",
+                                                    "direccion": "Administrativa",
+                                                    "activa": true,
+                                                    "creado_en": "2021-10-31T07:48:00.862Z"
+                                                },
+                                                "rol": {
+                                                    "id_rol": "ADM",
+                                                    "nombre": "Administrador",
+                                                    "creado_en": "2021-10-31T07:48:00.776Z"
+                                                }
+                                            },
+                                            {
+                                                "id_usuario": 3,
+                                                "id_sede": 2,
+                                                "id_rol": "MSR",
+                                                "documento": "666998745",
+                                                "nombre": "Eduard",
+                                                "apellido": "Ramirez",
+                                                "fecha_nacimiento": "1996-10-16",
+                                                "activo": true,
+                                                "creado_en": "2021-11-01T04:04:35.571Z",
+                                                "sede": {
+                                                    "id_sede": 2,
+                                                    "descripcion": "Suba",
+                                                    "direccion": "carrera 85 # 105",
+                                                    "activa": true,
+                                                    "creado_en": "2021-10-31T02:49:00.521Z"
+                                                },
+                                                "rol": {
+                                                    "id_rol": "MSR",
+                                                    "nombre": "Mesero",
+                                                    "creado_en": "2021-10-31T07:48:00.776Z"
+                                                }
+                                            }
+                                        ],
+                                        "result": null
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Crear un usuario",
+                "description": "Crea un usuario especificando todas sus propiedades. Solo es creado si el usuario aún no existe",
+                "operationId": "createUser",
+                "requestBody": {
+                    "description": "Datos para crear un usuario",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "id_sede": 2,
+                                    "id_rol": "MSR",
+                                    "documento": "321489754",
+                                    "nombre": "Daniela",
+                                    "apellido": "Garcia",
+                                    "fecha_nacimiento": "2000-07-29",
+                                    "activo": false
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 201,
+                                        "message": "Usuario creado.",
+                                        "results": [],
+                                        "result": {
+                                            "creado_en": "2022-04-11T08:57:12.423Z",
+                                            "id_usuario": 15,
+                                            "id_sede": 2,
+                                            "id_rol": "MSR",
+                                            "documento": "321489754",
+                                            "nombre": "Daniela",
+                                            "apellido": "Garcia",
+                                            "fecha_nacimiento": "2000-07-29",
+                                            "activo": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 400,
+                                        "code": "23505",
+                                        "message": "El usuario ya existe.",
+                                        "result": null,
+                                        "results": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{userId}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Devuelve un usuario especificando su ID",
+                "operationId": "getUserById",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID del usuario a retornar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 200,
+                                        "message": null,
+                                        "results": [],
+                                        "result": {
+                                            "id_usuario": 1,
+                                            "id_sede": 1,
+                                            "id_rol": "ADM",
+                                            "documento": "111111111",
+                                            "nombre": "Jorge",
+                                            "apellido": "Sanabria",
+                                            "fecha_nacimiento": "1999-09-13",
+                                            "activo": true,
+                                            "creado_en": "2021-10-31T07:48:00.949Z",
+                                            "sede": {
+                                                "nombre_sede": "Administrativa"
+                                            },
+                                            "rol": {
+                                                "nombre_rol": "Administrador"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 404,
+                                        "message": "No se encontró un usuario con el id 1",
+                                        "result": null,
+                                        "results": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Actualiza un usuario expecificando su ID",
+                "operationId": "updateUser",
+                "description": "Actualiza la información de un usuario. Si este no existe entonces lo crea",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID del usuario a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 2
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Datos para actualizar o crear un usuario",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "id_sede": 2,
+                                    "id_rol": "CJR",
+                                    "documento": "328845887",
+                                    "nombre": "Juan Felipe",
+                                    "apellido": "Perez",
+                                    "fecha_nacimiento": "2002-11-20",
+                                    "activo": false
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 200,
+                                        "message": "Usuario actualizado.",
+                                        "results": [],
+                                        "result": {
+                                            "affected_rows": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 201,
+                                        "message": "Usuario creado.",
+                                        "results": [],
+                                        "result": {
+                                            "creado_en": "2022-04-12T08:36:08.466Z",
+                                            "id_sede": 2,
+                                            "id_rol": "CJR",
+                                            "documento": "32884887",
+                                            "nombre": "Juan Felipe",
+                                            "apellido": "Perez",
+                                            "fecha_nacimiento": "2002-11-20",
+                                            "activo": false,
+                                            "id_usuario": 18
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 400,
+                                        "code": "23505",
+                                        "message": "El usuario ya existe.",
+                                        "result": null,
+                                        "results": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Actualiza un usuario expecificando su ID",
+                "description": "Actualiza una parte o la totalidad de un usuario expecificando su ID",
+                "operationId": "patchUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID del usuario a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 2
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Datos para actualizar un usuario. Al ser un metodo PATCH, este puede admitir una o varias de las propiedades que se quieran actualizar del Usuario",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "id_sede": 2,
+                                    "id_rol": "CJR",
+                                    "documento": "328845887",
+                                    "nombre": "Juan Felipe",
+                                    "apellido": "Perez",
+                                    "fecha_nacimiento": "2002-11-20",
+                                    "activo": false
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 200,
+                                        "message": "Usuario actualizado.",
+                                        "results": [],
+                                        "result": {
+                                            "affected_rows": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 404,
+                                        "message": "No se puede actualizar un usuario que no existe.",
+                                        "result": null,
+                                        "results": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Elimina un usuario expecificando su ID",
+                "operationId": "deleteUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID del usuario a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 2
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 200,
+                                        "message": "Usuario eliminado.",
+                                        "results": [],
+                                        "result": {
+                                            "affected_rows": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 404,
+                                        "message": "No se puede eliminar un usuario que no existe.",
+                                        "result": null,
+                                        "results": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
