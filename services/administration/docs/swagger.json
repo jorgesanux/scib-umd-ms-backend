@@ -250,14 +250,179 @@
                     "User"
                 ],
                 "summary": "Actualiza un usuario expecificando su ID",
-                "operationId": "updateUser"
+                "operationId": "updateUser",
+                "description": "Actualiza la información de un usuario. Si este no existe entonces lo crea",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID del usuario a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 2
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Datos para actualizar o crear un usuario",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "id_sede": 2,
+                                    "id_rol": "CJR",
+                                    "documento": "328845887",
+                                    "nombre": "Juan Felipe",
+                                    "apellido": "Perez",
+                                    "fecha_nacimiento": "2002-11-20",
+                                    "activo": false
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 200,
+                                        "message": "Usuario actualizado.",
+                                        "results": [],
+                                        "result": {
+                                            "affected_rows": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 201,
+                                        "message": "Usuario creado.",
+                                        "results": [],
+                                        "result": {
+                                            "creado_en": "2022-04-12T08:36:08.466Z",
+                                            "id_sede": 2,
+                                            "id_rol": "CJR",
+                                            "documento": "32884887",
+                                            "nombre": "Juan Felipe",
+                                            "apellido": "Perez",
+                                            "fecha_nacimiento": "2002-11-20",
+                                            "activo": false,
+                                            "id_usuario": 18
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 400,
+                                        "code": "23505",
+                                        "message": "El usuario ya existe.",
+                                        "result": null,
+                                        "results": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             },
             "patch": {
                 "tags": [
                     "User"
                 ],
                 "summary": "Actualiza un usuario expecificando su ID",
-                "operationId": "patchUser"
+                "description": "Actualiza una parte o la totalidad de un usuario expecificando su ID",
+                "operationId": "patchUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID del usuario a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 2
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Datos para actualizar un usuario. Al ser un metodo PATCH, este puede admitir una o varias de las propiedades que se quieran actualizar del Usuario",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "id_sede": 2,
+                                    "id_rol": "CJR",
+                                    "documento": "328845887",
+                                    "nombre": "Juan Felipe",
+                                    "apellido": "Perez",
+                                    "fecha_nacimiento": "2002-11-20",
+                                    "activo": false
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 200,
+                                        "message": "Usuario actualizado.",
+                                        "results": [],
+                                        "result": {
+                                            "affected_rows": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 404,
+                                        "message": "No se puede actualizar un usuario que no existe.",
+                                        "result": null,
+                                        "results": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             },
             "delete": {
                 "tags": [
