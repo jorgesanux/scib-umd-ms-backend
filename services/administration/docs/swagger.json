@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Microservice Administration",
-        "version": "1.0.0",
+        "title": "Microservice Administration SCIB UMD",
+        "version": "0.0.1",
         "contact": {
             "name": "SCIB UMD API"
         }
@@ -13,12 +13,8 @@
     "produces": [
         "application/json"
     ],
-    "host": "localhost:3000",
     "servers": [
-        {
-            "url": "http://localhost:3000/api",
-            "description": "Local Server"
-        }
+        {"url": "/api"}
     ],
     "tags": [
         {
