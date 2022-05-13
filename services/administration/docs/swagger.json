@@ -20,6 +20,10 @@
         {
             "name": "User",
             "description": "Operaciones relacionadas con el usuario"
+        },
+        {
+            "name": "Table",
+            "description": "Operaciones relacionadas con las mesas"
         }
     ],
     "paths": {
@@ -469,6 +473,60 @@
                                         "message": "No se puede eliminar un usuario que no existe.",
                                         "result": null,
                                         "results": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/table":{
+            "get": {
+                "tags": [
+                    "Table"
+                ],
+                "summary": "Devuelve todas las mesas",
+                "description": "Retorna una lista con todas las mesas disponibles en el sistema",
+                "operationId": "getAllTables",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 200,
+                                        "message": null,
+                                        "results": [{
+                                            "id_mesa": 2,
+                                            "id_sede": 2,
+                                            "nombre": "Mesa 3",
+                                            "libre": false,
+                                            "activa": true,
+                                            "sede": {
+                                                "id_sede": 2,
+                                                "descripcion": "Suba",
+                                                "direccion": "carrera 85 # 105",
+                                                "activa": true,
+                                                "creado_en": "2021-10-31T02:49:00.521Z"
+                                            }
+                                        }, {
+                                            "id_mesa": 5,
+                                            "id_sede": 2,
+                                            "nombre": "Mesa 5",
+                                            "libre": false,
+                                            "activa": true,
+                                            "sede": {
+                                                "id_sede": 2,
+                                                "descripcion": "Suba",
+                                                "direccion": "carrera 85 # 105",
+                                                "activa": true,
+                                                "creado_en": "2021-10-31T02:49:00.521Z"
+                                            }
+                                        }],
+                                        "result": null
                                     }
                                 }
                             }
