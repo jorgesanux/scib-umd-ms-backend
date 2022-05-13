@@ -33,6 +33,10 @@ class BaseRepository{
         });
     }
 
+    getModel(){
+        return this.#model;
+    }
+
     /**
      * Retorna las clases modelo de las relaciones
      * @returns {Array<Sequelize.Model>}
