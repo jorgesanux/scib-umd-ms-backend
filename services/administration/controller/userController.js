@@ -1,32 +1,19 @@
 import User from "../model/user.js";
-import Sede from "../model/sede.js";
-import Rol from "../model/rol.js";
 import APIError from "../util/apiError.js";
+
+import UserRepository from "../repository/UserRepository.js";
 
 import { UniqueConstraintError } from 'sequelize';
 
-export default class UserController{
+class UserController{
+    userRepository = new UserRepository();
+
     async getAllUsers(){
-        return User.findAll({
-            include: [Sede, Rol]
-        });
+        return this.userRepository.getAll();
     }
 
     async getUser(id){
-        const user = await User.findByPk(id, {
-            include: [
-                {
-                    model: Sede,
-                    attributes: [["descripcion","nombre_sede"]],
-                    required: true
-                },
-                {
-                    model: Rol,
-                    attributes: [["nombre","nombre_rol"]],
-                    required: true
-                }
-            ]
-        });
+        const user = await this.userRepository.getByPk(id);
         if(user === null ) throw new APIError(404, `No se encontró un usuario con el id ${id}`);
         return user;
     }
@@ -87,3 +74,5 @@ export default class UserController{
         }
     }
 }
+
+export default UserController;
