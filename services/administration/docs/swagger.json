@@ -14,7 +14,9 @@
         "application/json"
     ],
     "servers": [
-        {"url": "/api"}
+        {
+            "url": "/api"
+        }
     ],
     "tags": [
         {
@@ -216,10 +218,16 @@
                                             "activo": true,
                                             "creado_en": "2021-10-31T07:48:00.949Z",
                                             "sede": {
-                                                "nombre_sede": "Administrativa"
+                                                "id_sede": 1,
+                                                "descripcion": "Administrativa",
+                                                "direccion": "Administrativa",
+                                                "activa": true,
+                                                "creado_en": "2021-10-31T07:48:00.862Z"
                                             },
                                             "rol": {
-                                                "nombre_rol": "Administrador"
+                                                "id_rol": "ADM",
+                                                "nombre": "Administrador",
+                                                "creado_en": "2021-10-31T07:48:00.776Z"
                                             }
                                         }
                                     }
@@ -481,7 +489,7 @@
                 }
             }
         },
-        "/table":{
+        "/table": {
             "get": {
                 "tags": [
                     "Table"
@@ -499,33 +507,36 @@
                                     "example": {
                                         "status": 200,
                                         "message": null,
-                                        "results": [{
-                                            "id_mesa": 2,
-                                            "id_sede": 2,
-                                            "nombre": "Mesa 3",
-                                            "libre": false,
-                                            "activa": true,
-                                            "sede": {
+                                        "results": [
+                                            {
+                                                "id_mesa": 2,
                                                 "id_sede": 2,
-                                                "descripcion": "Suba",
-                                                "direccion": "carrera 85 # 105",
+                                                "nombre": "Mesa 3",
+                                                "libre": false,
                                                 "activa": true,
-                                                "creado_en": "2021-10-31T02:49:00.521Z"
-                                            }
-                                        }, {
-                                            "id_mesa": 5,
-                                            "id_sede": 2,
-                                            "nombre": "Mesa 5",
-                                            "libre": false,
-                                            "activa": true,
-                                            "sede": {
+                                                "sede": {
+                                                    "id_sede": 2,
+                                                    "descripcion": "Suba",
+                                                    "direccion": "carrera 85 # 105",
+                                                    "activa": true,
+                                                    "creado_en": "2021-10-31T02:49:00.521Z"
+                                                }
+                                            },
+                                            {
+                                                "id_mesa": 5,
                                                 "id_sede": 2,
-                                                "descripcion": "Suba",
-                                                "direccion": "carrera 85 # 105",
+                                                "nombre": "Mesa 5",
+                                                "libre": false,
                                                 "activa": true,
-                                                "creado_en": "2021-10-31T02:49:00.521Z"
+                                                "sede": {
+                                                    "id_sede": 2,
+                                                    "descripcion": "Suba",
+                                                    "direccion": "carrera 85 # 105",
+                                                    "activa": true,
+                                                    "creado_en": "2021-10-31T02:49:00.521Z"
+                                                }
                                             }
-                                        }],
+                                        ],
                                         "result": null
                                     }
                                 }
