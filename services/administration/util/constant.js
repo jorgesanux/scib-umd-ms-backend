@@ -8,6 +8,7 @@ class TableName{
     static USER_TABLE = "scib_usuario";
     static ROL_TABLE = "scib_rol";
     static SEDE_TABLE = "scib_sede";
+    static MESA_TABLE = "scib_mesa";
 }
 
 export default class Constant{
