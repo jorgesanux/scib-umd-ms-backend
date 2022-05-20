@@ -1,6 +1,7 @@
 class BasePath{
     static BASE_PATH = "/api"
     static BASE_PATH_USER = "/user";
+    static BASE_PATH_TABLE = "/table";
     static BASE_PATH_SWAGGER = "/api-docs"
 }
 

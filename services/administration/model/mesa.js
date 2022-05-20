@@ -4,7 +4,7 @@ import sequelize from "../config/db.js";
 import Constant from "../util/constant.js";
 import Sede from "./sede.js";
 
-class Mesa extends Model {}
+class Mesa extends Model {};
 
 Mesa.init({
     id_mesa: {

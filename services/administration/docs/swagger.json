@@ -14,12 +14,18 @@
         "application/json"
     ],
     "servers": [
-        {"url": "/api"}
+        {
+            "url": "/api"
+        }
     ],
     "tags": [
         {
             "name": "User",
             "description": "Operaciones relacionadas con el usuario"
+        },
+        {
+            "name": "Table",
+            "description": "Operaciones relacionadas con las mesas"
         }
     ],
     "paths": {
@@ -212,10 +218,16 @@
                                             "activo": true,
                                             "creado_en": "2021-10-31T07:48:00.949Z",
                                             "sede": {
-                                                "nombre_sede": "Administrativa"
+                                                "id_sede": 1,
+                                                "descripcion": "Administrativa",
+                                                "direccion": "Administrativa",
+                                                "activa": true,
+                                                "creado_en": "2021-10-31T07:48:00.862Z"
                                             },
                                             "rol": {
-                                                "nombre_rol": "Administrador"
+                                                "id_rol": "ADM",
+                                                "nombre": "Administrador",
+                                                "creado_en": "2021-10-31T07:48:00.776Z"
                                             }
                                         }
                                     }
@@ -469,6 +481,63 @@
                                         "message": "No se puede eliminar un usuario que no existe.",
                                         "result": null,
                                         "results": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/table": {
+            "get": {
+                "tags": [
+                    "Table"
+                ],
+                "summary": "Devuelve todas las mesas",
+                "description": "Retorna una lista con todas las mesas disponibles en el sistema",
+                "operationId": "getAllTables",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": 200,
+                                        "message": null,
+                                        "results": [
+                                            {
+                                                "id_mesa": 2,
+                                                "id_sede": 2,
+                                                "nombre": "Mesa 3",
+                                                "libre": false,
+                                                "activa": true,
+                                                "sede": {
+                                                    "id_sede": 2,
+                                                    "descripcion": "Suba",
+                                                    "direccion": "carrera 85 # 105",
+                                                    "activa": true,
+                                                    "creado_en": "2021-10-31T02:49:00.521Z"
+                                                }
+                                            },
+                                            {
+                                                "id_mesa": 5,
+                                                "id_sede": 2,
+                                                "nombre": "Mesa 5",
+                                                "libre": false,
+                                                "activa": true,
+                                                "sede": {
+                                                    "id_sede": 2,
+                                                    "descripcion": "Suba",
+                                                    "direccion": "carrera 85 # 105",
+                                                    "activa": true,
+                                                    "creado_en": "2021-10-31T02:49:00.521Z"
+                                                }
+                                            }
+                                        ],
+                                        "result": null
                                     }
                                 }
                             }

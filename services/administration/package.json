@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www.js",
-    "dev": "nodemon ./bin/www.js"
+    "dev": "nodemon ./bin/www.js",
+    "debug": "node --inspect ./bin/www.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -22,6 +23,7 @@
   "license": "MIT",
   "devDependencies": {
     "dotenv": "^16.0.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "sequelize-auto": "^0.8.8"
   }
 }

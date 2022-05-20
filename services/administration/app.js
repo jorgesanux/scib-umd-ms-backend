@@ -9,7 +9,8 @@ import swaggerUI from 'swagger-ui-express';
 
 import Constant from './util/constant.js';
 import indexRouter from "./routes/index.js";
-import userRouter from "./routes/user.js";
+import userRouter from "./routes/UserRouter.js";
+import tableRouter from "./routes/TableRouter.js";
 import APIError from './util/apiError.js';
 
 const require = createRequire(import.meta.url);
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(Constant.BASE_PATH.BASE_PATH, indexRouter);
 app.use(Constant.BASE_PATH.BASE_PATH + Constant.BASE_PATH.BASE_PATH_USER, userRouter);
+app.use(Constant.BASE_PATH.BASE_PATH + Constant.BASE_PATH.BASE_PATH_TABLE, tableRouter);
 
 app.use((error, _req, res, next)=>{
     if(error instanceof APIError){
