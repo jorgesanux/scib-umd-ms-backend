@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 
-import sequelize from "../config/db.js";
+import sequelize from "../../config/db.js";
 import Constant from "../util/constant.js";
 
 class Sede extends Model {}

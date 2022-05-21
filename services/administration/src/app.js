@@ -14,7 +14,7 @@ import tableRouter from "./routes/TableRouter.js";
 import APIError from './util/apiError.js';
 
 const require = createRequire(import.meta.url);
-const swaggerDocument = require("./docs/swagger.json");
+const swaggerDocument = require("../docs/swagger.json");
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
